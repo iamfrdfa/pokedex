@@ -8,19 +8,126 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header > img {
+    width: 100px;
+    height: 100px;
+    margin: 24px 16px 32px 0;
+}
+
+#searchSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+input#searchPokemonInput {
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    line-height: 18px;
+    padding-left: 12px;
+    margin-bottom: 16px;
+}
+
+input#searchPokemonInput:focus {
+    cursor: pointer;
+    border: 1px solid lightgray;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    gap: 42px;
+}
+
+#searchPokemon,
+#resetSearch {
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+}
+
+/* Mainsection */
+#mainSection {
+    width: 100%;
+    display: flex;
+    padding: 16px;
+}
+
 #pokedex {
-    min-height: 50vh;
+    background-color: transparent;
+}
+
+#pokedex div {
+    display: flex;
+}
+
+#pokeCard {
+    width: 240px;
+    height: 240px;
     background-color: #F66C6D;
     color: white;
     display: flex;
-    padding: 24px;
-
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding-top: 16px;
 }
 
-.infoContainer {
+#pokeCard:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.pokemonType {
+    width: 80%;
+    display: flex;
+    gap: 24px;
+}
+
+.pokemonType > div > p {
+    border: 1px solid white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#pokemonName {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.smallPokemonImage {
+    height: 147px;
+    width: auto;
+    z-index: 2;
+}
+
+.pokeCardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 4px;
+}
+
+.pokeCardBottom {
+    height: 80px;
+    width: 100%;
     background-color: white;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    margin-top: -40px;
-    min-height: 100px;
+    margin-top: -24px;
+    border-radius: 20px 20px 10px 10px;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

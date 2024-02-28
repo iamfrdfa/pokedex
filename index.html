@@ -16,13 +16,46 @@
     <title>Pokédex</title>
 </head>
 
-<body onload="loadPokemon()">
-    <div id="pokedex">
-        <h1 id="pokemonName"></h1>
-    </div>
+<body onload="init()">
+    <header>
+        <img src="./img/pokeball_logo.jpg" alt="pokeball">
+        <h1>Pokédex</h1>
+    </header>
     
-    <div class="infoContainer">
-        <img src="" alt="" id="pokemonImage">
-    </div>
+    <section id="searchSection">
+        <label for="searchPokemonInput">
+            <input id="searchPokemonInput" type="text" placeholder="Type to search...">
+        </label>
+        <div id="buttons">
+            <button id="searchPokemon">Search</button>
+            <button id="resetSearch">Reset Search</button>
+        </div>
+    </section>
+    
+    <section id="mainSection">
+        <div id="pokedex">
+            <div id="pokeCard" onclick="openPokemonInfo">
+                <div class="pokeCardTop">
+                    <h2 id="pokemonName"></h2>
+                    <div id="number">#0001</div>
+                </div>
+                
+                <div class="pokemonType">
+                    <div>
+                        <p id="pokemonFirstCategory">Fire</p>
+                    </div>
+                    <div>
+                        <p id="pokemonSecondCategory">Poison</p>
+                    </div>
+                </div>
+                
+                <img src="" alt="pokemonImage" id="pokemonImage" class="smallPokemonImage">
+                
+                <div class="pokeCardBottom">
+                
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
