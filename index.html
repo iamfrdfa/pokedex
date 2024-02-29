@@ -8,7 +8,11 @@
     <link rel="icon" type="image/png" href="./img/favicon.png">
     
     <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -17,6 +21,48 @@
 </head>
 
 <body onload="init()">
+    <section id="pokemonInfoOverlay">
+        <div id="bigPokeCard">
+            <div class="bigPokeCardTop">
+                <h2 id="pokemonInfoName"></h2>
+                <div id="pokemonNumber">#001</div>
+            </div>
+            
+            <div class="pokemonType">
+                <div>
+                    <p id="pokemonFirstCategory">Poison</p>
+                </div>
+                <div>
+                    <p id="pokemonSecondCategory">Fire</p>
+                </div>
+            </div>
+            
+            <img src="" alt="pokemonImage" id="pokemonInfoImage" class="bigPokemonImage">
+            
+            <div class="bigPokeCardBottom">
+                <h3>About</h3>
+                <div id="aboutWrapper">
+                    <div class="left">
+                        <div>Height</div>
+                        <div>Weight</div>
+                        <div>Abilities</div>
+                    </div>
+                    
+                    <div id="abilities-id" class="right">
+                        <div>Height</div>
+                        <div>Weight</div>
+                        <div>Abilities</div>
+                    </div>
+                </div>
+                
+                <div id="stats">
+                    <h3>Basic Statistics</h3>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <header>
         <img src="./img/pokeball_logo.jpg" alt="pokeball">
         <h1>Pokédex</h1>
@@ -34,28 +80,9 @@
     
     <section id="mainSection">
         <div id="pokedex">
-            <div id="pokeCard" onclick="openPokemonInfo">
-                <div class="pokeCardTop">
-                    <h2 id="pokemonName"></h2>
-                    <div id="number">#0001</div>
-                </div>
-                
-                <div class="pokemonType">
-                    <div>
-                        <p id="pokemonFirstCategory">Fire</p>
-                    </div>
-                    <div>
-                        <p id="pokemonSecondCategory">Poison</p>
-                    </div>
-                </div>
-                
-                <img src="" alt="pokemonImage" id="pokemonImage" class="smallPokemonImage">
-                
-                <div class="pokeCardBottom">
-                
-                </div>
-            </div>
         </div>
     </section>
+
+    
 </body>
 </html>
