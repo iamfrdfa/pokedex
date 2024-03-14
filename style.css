@@ -8,6 +8,10 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+h3 {
+    font-size: 20px;
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -200,6 +204,20 @@ button:hover {
     align-items: center;
     flex-direction: column;
     color: black;
+}
+
+#aboutHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15%;
+}
+
+.arrowButton {
+    height: 40px;
+    width: 40px;
 }
 
 #aboutWrapper {
