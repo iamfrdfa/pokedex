@@ -3,7 +3,7 @@ let currentPokemon;
 let allPokemon = [];
 let allPokemonStats = [];
 let startCount = 1;
-let endCount = 1;
+let endCount = 12;
 
 async function loadPokemon() {
     for (let i = startCount; i <= endCount; i++) {
@@ -14,13 +14,7 @@ async function loadPokemon() {
         allPokemon.push(currentPokemon);
         renderPokemonCard(i);
     }
-    //openPokemonInfo();
     console.log('Loaded Pokemon: ', currentPokemon);
-    //console.log('Pokemon Type 1: ', currentPokemon['types']['0']['type']['name']);
-    //console.log('Pokemon Type 2: ', currentPokemon['types']['1']['type']['name']);
-    for(let i= 0; i < currentPokemon['types'].length; i++) {
-        console.log(`Pokemon Type ${i + 1}:`, currentPokemon['types'][i]['type']['name']);
-    }
 }
 
 function renderPokemonCard(indexPokemon) {
@@ -32,7 +26,7 @@ function renderPokemonCard(indexPokemon) {
             </div>
             
             <div class="pokemonType">
-                <div id="pokemonTypes_${indexPokemon}">
+                <div id="pokemonTypes_${indexPokemon}" class="pokemonTypes">
                     ${getTypesHTML()}
                 </div>
             </div>

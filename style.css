@@ -4,7 +4,7 @@ html {
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 16px;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -67,7 +67,6 @@ button:hover {
 #mainSection {
     width: 100%;
     display: flex;
-    padding: 16px;
 }
 
 #pokedex {
@@ -114,6 +113,10 @@ button:hover {
     border-radius: 8px;
     margin-block-start: 0;
     margin-block-end: 0;
+}
+
+.pokemonType > div > p:first-child {
+    margin-right: 16px;
 }
 
 #pokemonName {
