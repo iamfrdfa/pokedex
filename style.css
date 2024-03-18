@@ -4,8 +4,12 @@ html {
 
 body {
     margin: 0;
-    padding: 16px;
+    padding: 0;
     font-family: 'Open Sans', sans-serif;
+}
+
+.d-none {
+    display: none !important;
 }
 
 h3 {
@@ -158,6 +162,9 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    top: 0;
+    z-index: 2;
 }
 
 #bigPokeCard {
@@ -237,4 +244,9 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.close-btn {
+    width: 40px;
+    height: 40px;
 }
