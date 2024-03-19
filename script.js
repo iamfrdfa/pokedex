@@ -3,7 +3,7 @@ let currentPokemon;
 let allPokemon = [];
 let allPokemonStats = [];
 let startCount = 1;
-let endCount = 8;
+let endCount = 6;
 
 async function loadPokemon() {
     for (let index = startCount; index <= endCount; index++) {
@@ -19,7 +19,7 @@ async function loadPokemon() {
 
 function renderPokemonCard(indexPokemon) {
     document.getElementById('pokedex').innerHTML += `
-        <div id="pokeCard" onclick="openPokemonOverlay(${indexPokemon})">
+        <div id="pokeCard_${indexPokemon}" class="pokeCard" onclick="openPokemonOverlay(${indexPokemon})">
             <div class="pokeCardTop">
                 <h2 id="pokemonName">${currentPokemon['name']}</h2>
                 <div id="number">#${indexPokemon}</div>
@@ -52,9 +52,9 @@ function getTypesHTML() {
 function openPokemonOverlay(indexOfPokemon) {
     document.getElementById('pokemonInfoOverlay').classList.remove('d-none');
     document.getElementById('pokemonInfoOverlay').innerHTML += `
-        <div id="bigPokeCard">
+        <div id="bigPokeCard_${indexOfPokemon}" class="bigPokeCard">
             <div class="bigPokeCardTop">
-                <h2 id="pokemonInfoName">${currentPokemon['name']}</h2>
+                <h2 id="pokemonInfoName">${allPokemon[indexOfPokemon - 1]["name"]}</h2>
                 <div id="pokemonNumber">#${indexOfPokemon}</div>
                 <div id="closeOverlay" onclick="closePokemonOverlay()">
                     <img src="./img/close.png" alt="close" class="close-btn">
@@ -67,7 +67,7 @@ function openPokemonOverlay(indexOfPokemon) {
                 </div>
             </div>
             
-            <img src="${currentPokemon['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonInfoImage" class="bigPokemonImage">
+            <img src="${allPokemon[indexOfPokemon - 1]['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonInfoImage" class="bigPokemonImage">
             
             <div class="bigPokeCardBottom">
                 <div id="aboutHeader">
@@ -77,15 +77,15 @@ function openPokemonOverlay(indexOfPokemon) {
                 </div>
                 <div id="aboutWrapper">
                     <div class="left">
-                        <div>Height</div>
-                        <div>Weight</div>
-                        <div>Abilities</div>
+                        <div>Height:</div>
+                        <div>Weight:</div>
+                        <div>Abilities:</div>
                     </div>
                     
                     <div id="abilities-id" class="right">
-                        <div>Height</div>
-                        <div>Weight</div>
-                        <div>Abilities</div>
+                        <div>${allPokemon[indexOfPokemon-1]['height']}"</div>
+                        <div>${allPokemon[indexOfPokemon-1]['weight']}</div>
+                        <div>${allPokemon[indexOfPokemon-1]['abilities']['0']['ability']['name']}</div>
                     </div>
                 </div>
                 
@@ -99,12 +99,8 @@ function openPokemonOverlay(indexOfPokemon) {
 }
 
 function closePokemonOverlay() {
+    document.getElementById('pokemonInfoOverlay').innerHTML = ``;
     document.getElementById('pokemonInfoOverlay').classList.add('d-none');
-}
-
-function openPokemonInfo() {
-    document.getElementById('pokemonInfoName').innerHTML += currentPokemon['name'];
-    document.getElementById('pokemonInfoImage').src = currentPokemon['sprites']['other']['home']['front_default'];
 }
 
 function nextPokemon() {
@@ -119,3 +115,16 @@ function init() {
     loadPokemon();
     renderStats();
 }
+
+//Funktion um mit bestimmten Tasten im Overlay zu agieren
+document.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape') {
+        closePokemonOverlay();
+    }
+    else if (evt.key === 'ArrowRight') {
+        nextPokemon(currentPokemon + 1);
+    }
+    else if (evt.key === 'ArrowLeft') {
+        previousPokemon(currentPokemon - 1);
+    }
+});
