@@ -1,9 +1,9 @@
 const AllPOKEMONS_API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
 let currentPokemon;
 let allPokemon = [];
-let allPokemonStats = [];
+let allPokemonTypes = [];
 let startCount = 1;
-let endCount = 6;
+let endCount = 500;
 
 async function loadPokemon() {
     for (let index = startCount; index <= endCount; index++) {
@@ -44,7 +44,7 @@ function getTypesHTML() {
     let htmlText = "";
     for (let indexOfPokemonType = 0; indexOfPokemonType < currentPokemon['types'].length; indexOfPokemonType++) {
         htmlText +=` <p>${currentPokemon['types'][indexOfPokemonType]['type']['name']}</p> `;
-        allPokemonStats.push(currentPokemon['types']);
+        allPokemonTypes.push(currentPokemon['types']);
     }
     return htmlText;
 }
