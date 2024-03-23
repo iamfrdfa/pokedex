@@ -3,7 +3,7 @@ let currentPokemon;
 let allPokemon = [];
 let allPokemonTypes = [];
 let startCount = 1;
-let endCount = 500;
+let endCount = 10;
 
 async function loadPokemon() {
     for (let index = startCount; index <= endCount; index++) {
@@ -45,6 +45,7 @@ function getTypesHTML() {
     for (let indexOfPokemonType = 0; indexOfPokemonType < currentPokemon['types'].length; indexOfPokemonType++) {
         htmlText +=` <p>${currentPokemon['types'][indexOfPokemonType]['type']['name']}</p> `;
         allPokemonTypes.push(currentPokemon['types']);
+        //console.log('Dein Typ: ', currentPokemon['types'][indexOfPokemonType]['type']['name']);
     }
     return htmlText;
 }
@@ -71,9 +72,9 @@ function openPokemonOverlay(indexOfPokemon) {
             
             <div class="bigPokeCardBottom">
                 <div id="aboutHeader">
-                    <img src="./img/left.png" alt="previousPokemon" class="arrowButton" onclick="previousPokemon()">
+                    <img src="./img/left.png" alt="previousPokemon" class="arrowButton" onclick="previousPokemon(${indexOfPokemon})">
                     <h3>About</h3>
-                    <img src="./img/right.png" alt="nextPokemon" class="arrowButton" onclick="nextPokemon()">
+                    <img src="./img/right.png" alt="nextPokemon" class="arrowButton" onclick="nextPokemon(${indexOfPokemon})">
                 </div>
                 <div id="aboutWrapper">
                     <div class="left">
@@ -103,12 +104,20 @@ function closePokemonOverlay() {
     document.getElementById('pokemonInfoOverlay').classList.add('d-none');
 }
 
-function nextPokemon() {
-
+function nextPokemon(indexOfPokemon) {
+    if (indexOfPokemon < 1025) {
+        indexOfPokemon++;
+        document.getElementById('pokemonInfoOverlay').innerHTML = ``;
+        openPokemonOverlay(indexOfPokemon);
+    }
 }
 
-function previousPokemon() {
-
+function previousPokemon(indexOfPokemon) {
+    if (indexOfPokemon >= 1) {
+        indexOfPokemon--;
+        document.getElementById('pokemonInfoOverlay').innerHTML = ``;
+        openPokemonOverlay(indexOfPokemon);
+    }
 }
 
 function init() {
