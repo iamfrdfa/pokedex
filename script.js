@@ -1,13 +1,12 @@
-const AllPOKEMONS_API_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
-let currentPokemon;
 let allPokemon = [];
 let allPokemonTypes = [];
-let startCount = 1;
-let endCount = 10;
+let startCount = 0;
+let endCount = 11;
 
 async function loadPokemon() {
+    let currentPokemon;
     for (let index = startCount; index <= endCount; index++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${index}`;
+        let url = `https://pokeapi.co/api/v2/pokemon/${index + 1}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
         
@@ -21,17 +20,17 @@ function renderPokemonCard(indexPokemon) {
     document.getElementById('pokedex').innerHTML += `
         <div id="pokeCard_${indexPokemon}" class="pokeCard" onclick="openPokemonOverlay(${indexPokemon})">
             <div class="pokeCardTop">
-                <h2 id="pokemonName">${currentPokemon['name']}</h2>
-                <div id="number">#${indexPokemon}</div>
+                <h2 id="pokemonName">${allPokemon[indexPokemon]['name']}</h2>
+                <div id="number">#${allPokemon[indexPokemon]['id']}</div>
             </div>
             
             <div class="pokemonType">
                 <div id="pokemonTypes_${indexPokemon}" class="pokemonTypes">
-                    ${getTypesHTML()}
+                    ${getTypesHTML(indexPokemon)}
                 </div>
             </div>
             
-            <img src="${currentPokemon['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonImage" class="smallPokemonImage">
+            <img src="${allPokemon[indexPokemon]['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonImage" class="smallPokemonImage">
             
             <div class="pokeCardBottom">
             
@@ -40,11 +39,12 @@ function renderPokemonCard(indexPokemon) {
     `;
 }
 
-function getTypesHTML() {
+function getTypesHTML(pokeIndex) {
     let htmlText = "";
-    for (let indexOfPokemonType = 0; indexOfPokemonType < currentPokemon['types'].length; indexOfPokemonType++) {
-        htmlText +=` <p>${currentPokemon['types'][indexOfPokemonType]['type']['name']}</p> `;
-        allPokemonTypes.push(currentPokemon['types']);
+    let detailPokemon = allPokemon[pokeIndex];
+    for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
+        htmlText +=` <p>${allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']}</p> `;
+        allPokemonTypes.push(detailPokemon['types']);
         //console.log('Dein Typ: ', currentPokemon['types'][indexOfPokemonType]['type']['name']);
     }
     return htmlText;
@@ -55,20 +55,20 @@ function openPokemonOverlay(indexOfPokemon) {
     document.getElementById('pokemonInfoOverlay').innerHTML += `
         <div id="bigPokeCard_${indexOfPokemon}" class="bigPokeCard">
             <div class="bigPokeCardTop">
-                <h2 id="pokemonInfoName">${allPokemon[indexOfPokemon - 1]["name"]}</h2>
-                <div id="pokemonNumber">#${indexOfPokemon}</div>
+                <h2 id="pokemonInfoName">${allPokemon[indexOfPokemon]["name"]}</h2>
+                <div id="pokemonNumber">#${indexOfPokemon + 1}</div>
                 <div id="closeOverlay" onclick="closePokemonOverlay()">
                     <img src="./img/close.png" alt="close" class="close-btn">
                 </div>
             </div>
             
             <div class="pokemonType">
-                <div>
-                    ${getTypesHTML()}
+                <div class="pokemonTypeOverlay">
+                    ${getTypesHTML(indexOfPokemon)}
                 </div>
             </div>
             
-            <img src="${allPokemon[indexOfPokemon - 1]['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonInfoImage" class="bigPokemonImage">
+            <img src="${allPokemon[indexOfPokemon]['sprites']['other']['home']['front_default']}" alt="pokemonImage" id="pokemonInfoImage" class="bigPokemonImage">
             
             <div class="bigPokeCardBottom">
                 <div id="aboutHeader">
@@ -84,9 +84,9 @@ function openPokemonOverlay(indexOfPokemon) {
                     </div>
                     
                     <div id="abilities-id" class="right">
-                        <div>${allPokemon[indexOfPokemon-1]['height']}"</div>
-                        <div>${allPokemon[indexOfPokemon-1]['weight']}</div>
-                        <div>${allPokemon[indexOfPokemon-1]['abilities']['0']['ability']['name']}</div>
+                        <div>${allPokemon[indexOfPokemon]['height']}"</div>
+                        <div>${allPokemon[indexOfPokemon]['weight']}</div>
+                        <div>${allPokemon[indexOfPokemon]['abilities']['0']['ability']['name']}</div>
                     </div>
                 </div>
                 
@@ -131,9 +131,9 @@ document.addEventListener('keydown', evt => {
         closePokemonOverlay();
     }
     else if (evt.key === 'ArrowRight') {
-        nextPokemon(currentPokemon + 1);
+        nextPokemon(allPokemon + 1);
     }
     else if (evt.key === 'ArrowLeft') {
-        previousPokemon(currentPokemon - 1);
+        previousPokemon(allPokemon - 1);
     }
 });

@@ -123,6 +123,10 @@ button:hover {
     margin-right: 16px;
 }
 
+.pokemonTypeOverlay {
+    display: flex;
+}
+
 #pokemonName {
     margin-block-start: 0;
     margin-block-end: 0;
