@@ -45,7 +45,7 @@ function getTypesHTML(pokeIndex) {
     for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
         htmlText +=` <p>${allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']}</p> `;
         allPokemonTypes.push(detailPokemon['types']);
-        //console.log('Dein Typ: ', currentPokemon['types'][indexOfPokemonType]['type']['name']);
+        //console.log('Dein Typ: ', allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']);
     }
     return htmlText;
 }
