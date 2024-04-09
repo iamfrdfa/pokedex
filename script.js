@@ -1,7 +1,9 @@
 let allPokemon = [];
 let allPokemonTypes = [];
+let allPokemonNames = [];
 let startCount = 0;
-let endCount = 11;
+let endCount = 14;
+let loadMoreCounter = 40;
 
 async function loadPokemon() {
     let currentPokemon;
@@ -11,8 +13,10 @@ async function loadPokemon() {
         currentPokemon = await response.json();
         
         allPokemon.push(currentPokemon);
+        allPokemonNames.push(currentPokemon['name']);
         renderPokemonCard(index);
     }
+    console.log('Pokemon-Name:', allPokemonNames);
     console.log('Loaded Pokemon: ', currentPokemon);
 }
 
@@ -99,6 +103,28 @@ function openPokemonOverlay(indexOfPokemon) {
     `;
 }
 
+function loadMorePokemon() {
+
+}
+
+function filterNames(index = 0) {
+    let search = document.getElementById('searchPokemonInput').value;
+    search = search.toLowerCase(); //um alles eingegebene in kleine Buchstaben umzuwandeln
+    
+    if (allPokemon[index]['name'].includes(search)) {
+        console.log('erstes if');
+        document.getElementById('pokedex').innerHTML = ``;
+        renderPokemonCard(index);
+    }
+    
+    /*let filteredPokemon = allPokemon.filter((searchName) => searchName.length > 1);
+    console.log(filteredPokemon);*/
+}
+function deleteSearch() {
+    document.getElementById('searchPokemonInput').value = ``;
+    renderPokemonCard();
+}
+
 function closePokemonOverlay() {
     document.getElementById('pokemonInfoOverlay').innerHTML = ``;
     document.getElementById('pokemonInfoOverlay').classList.add('d-none');
@@ -122,7 +148,7 @@ function previousPokemon(indexOfPokemon) {
 
 function init() {
     loadPokemon();
-    renderStats();
+    //renderStats();
 }
 
 //Funktion um mit bestimmten Tasten im Overlay zu agieren

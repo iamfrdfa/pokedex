@@ -10,8 +10,8 @@
     <script src="script.js"></script>
     
     <!-- Chart.js -->
-    <script src="chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--script src="chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script-->
     
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,19 +29,25 @@
     
     <section id="searchSection">
         <label for="searchPokemonInput">
-            <input id="searchPokemonInput" type="text" placeholder="Type to search...">
+            <input id="searchPokemonInput" onkeyup="filterNames()" type="text" placeholder="Type to search...">
         </label>
         <div id="buttons">
-            <button id="searchPokemon">Search</button>
-            <button id="resetSearch">Reset Search</button>
+            <button id="searchPokemon" onclick="">Search</button>
+            <button id="resetSearch" onclick="deleteSearch()">Reset Search</button>
         </div>
     </section>
     
     <section id="mainSection">
         <div id="pokedex">
+        
+        </div>
+        
+        <div id="loadMore">
+            <button onclick="loadMorePokemon()">
+                Load More Pokemon
+            </button>
         </div>
     </section>
-    
     
     <section id="pokemonInfoOverlay" class="d-none">
     

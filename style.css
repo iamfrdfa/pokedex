@@ -69,8 +69,20 @@ button:hover {
 
 /*##### Mainsection #####*/
 #mainSection {
-    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+}
+
+#loadMore > button {
+    background-color: #FBCA1C;
+    border: none;
+    font-size: 20px;
+    line-height: 40px;
+    padding: 8px 12px;
+    border-radius: 24px;
 }
 
 #pokedex {
