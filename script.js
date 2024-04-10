@@ -2,7 +2,7 @@ let allPokemon = [];
 let allPokemonTypes = [];
 let allPokemonNames = [];
 let startCount = 0;
-let endCount = 14;
+let endCount = 19;
 let loadMoreCounter = 40;
 
 async function loadPokemon() {
@@ -110,15 +110,14 @@ function loadMorePokemon() {
 function filterNames(index = 0) {
     let search = document.getElementById('searchPokemonInput').value;
     search = search.toLowerCase(); //um alles eingegebene in kleine Buchstaben umzuwandeln
+    document.getElementById('pokedex').innerHTML = ``;
     
-    if (allPokemon[index]['name'].includes(search)) {
-        console.log('erstes if');
-        document.getElementById('pokedex').innerHTML = ``;
-        renderPokemonCard(index);
+    for (let index = 0; index < allPokemon.length; index++) {
+        if (allPokemon[index]['name'].includes(search)) {
+            console.log('Current-index: ', index);
+            renderPokemonCard(index);
+        }
     }
-    
-    /*let filteredPokemon = allPokemon.filter((searchName) => searchName.length > 1);
-    console.log(filteredPokemon);*/
 }
 function deleteSearch() {
     document.getElementById('searchPokemonInput').value = ``;
