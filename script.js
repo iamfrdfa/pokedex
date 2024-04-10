@@ -16,7 +16,6 @@ async function loadPokemon() {
         allPokemonNames.push(currentPokemon['name']);
         renderPokemonCard(index);
     }
-    console.log('Pokemon-Name:', allPokemonNames);
     console.log('Loaded Pokemon: ', currentPokemon);
 }
 
@@ -49,7 +48,6 @@ function getTypesHTML(pokeIndex) {
     for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
         htmlText +=` <p>${allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']}</p> `;
         allPokemonTypes.push(detailPokemon['types']);
-        //console.log('Dein Typ: ', allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']);
     }
     return htmlText;
 }
@@ -114,7 +112,6 @@ function filterNames(index = 0) {
     
     for (let index = 0; index < allPokemon.length; index++) {
         if (allPokemon[index]['name'].includes(search)) {
-            console.log('Current-index: ', index);
             renderPokemonCard(index);
         }
     }
