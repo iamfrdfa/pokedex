@@ -3,7 +3,7 @@ let allPokemonTypes = [];
 let allPokemonNames = [];
 let startCount = 0;
 let endCount = 19;
-let loadMoreCounter = 40;
+let loadMoreCounter = 20;
 
 async function loadPokemon() {
     let currentPokemon;
@@ -17,6 +17,13 @@ async function loadPokemon() {
         renderPokemonCard(index);
     }
     console.log('Loaded Pokemon: ', currentPokemon);
+}
+
+function loadMorePokemon() {
+    startCount += loadMoreCounter;
+    endCount += loadMoreCounter;
+    loadPokemon();
+    renderPokemonCard();
 }
 
 function renderPokemonCard(indexPokemon) {
@@ -99,10 +106,6 @@ function openPokemonOverlay(indexOfPokemon) {
             </div>
         </div>
     `;
-}
-
-function loadMorePokemon() {
-
 }
 
 function filterNames(index = 0) {
