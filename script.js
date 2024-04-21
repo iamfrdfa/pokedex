@@ -2,10 +2,12 @@ let allPokemon = [];
 let allPokemonTypes = [];
 let allPokemonNames = [];
 let startCount = 0;
-let endCount = 19;
-let loadMoreCounter = 20;
+let endCount = 29;
+let loadMoreCounter = 30;
+let allPokemonStatsName = [];
+let allPokemonStatsValue = [];
 
-async function loadPokemon() {
+async function loadPokemon(index) {
     let currentPokemon;
     for (let index = startCount; index <= endCount; index++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${index + 1}`;
@@ -14,16 +16,30 @@ async function loadPokemon() {
         
         allPokemon.push(currentPokemon);
         allPokemonNames.push(currentPokemon['name']);
+        allPokemonStatsValue.push(currentPokemon['stats']);
+        
         renderPokemonCard(index);
     }
+    
+    //savePokemonStats(index);
+    
     console.log('Loaded Pokemon: ', currentPokemon);
 }
 
-function loadMorePokemon() {
+function savePokemonStats(indexNumber = 0) {
+    let detailPokemonStats = allPokemon[indexNumber];
+    for (let indexOfPokemonStats = 0; indexOfPokemonStats < detailPokemonStats['stats'].length; indexOfPokemonStats++) {
+        allPokemonStatsName.push(detailPokemonStats['stats'][indexOfPokemonStats]['stat']['name']);
+        allPokemonStatsValue.push(detailPokemonStats['stats'][indexOfPokemonStats]['base_stat']);
+        console.log('Die Stats-Namen sind: ', allPokemonStatsName);
+        console.log('Die Stats-Werte sind: ', allPokemonStatsValue);
+    }
+}
+
+async function loadMorePokemon() {
     startCount += loadMoreCounter;
     endCount += loadMoreCounter;
-    loadPokemon();
-    renderPokemonCard();
+    await loadPokemon();
 }
 
 function renderPokemonCard(indexPokemon) {
@@ -81,9 +97,9 @@ function openPokemonOverlay(indexOfPokemon) {
             
             <div class="bigPokeCardBottom">
                 <div id="aboutHeader">
-                    <img src="./img/left.png" alt="previousPokemon" class="arrowButton" onclick="previousPokemon(${indexOfPokemon})">
+                    <img src="./img/left.png" alt="previousPokemon" class="arrowButtonLeft" onclick="previousPokemon(${indexOfPokemon})">
                     <h3>About</h3>
-                    <img src="./img/right.png" alt="nextPokemon" class="arrowButton" onclick="nextPokemon(${indexOfPokemon})">
+                    <img src="./img/right.png" alt="nextPokemon" class="arrowButtonRight" onclick="nextPokemon(${indexOfPokemon})">
                 </div>
                 <div id="aboutWrapper">
                     <div class="left">
@@ -101,11 +117,12 @@ function openPokemonOverlay(indexOfPokemon) {
                 
                 <div id="stats">
                     <h3>Basic Statistics</h3>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" style="height: 15vh; width: 30vw;"></canvas>
                 </div>
             </div>
         </div>
     `;
+    renderStats(indexOfPokemon);
 }
 
 function filterNames(index = 0) {
@@ -119,9 +136,10 @@ function filterNames(index = 0) {
         }
     }
 }
+
 function deleteSearch() {
     document.getElementById('searchPokemonInput').value = ``;
-    renderPokemonCard();
+    loadPokemon();
 }
 
 function closePokemonOverlay() {
@@ -147,7 +165,6 @@ function previousPokemon(indexOfPokemon) {
 
 function init() {
     loadPokemon();
-    //renderStats();
 }
 
 //Funktion um mit bestimmten Tasten im Overlay zu agieren
@@ -162,3 +179,14 @@ document.addEventListener('keydown', evt => {
         previousPokemon(allPokemon - 1);
     }
 });
+
+/*
+window.addEventListener('load', evt => {
+    const loader = document.querySelector(".loader");
+    
+    loader.classList.add('loader-hidden');
+    
+    loader.addEventListener('transitionend', evt => {
+        document.body.removeChild(loader);
+    })
+})*/

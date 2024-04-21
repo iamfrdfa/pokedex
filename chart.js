@@ -1,13 +1,19 @@
-function renderStats() {
+function renderStats(i) {
     const ctx = document.getElementById('myChart');
+    let justBaseStatValues = [];
+    
+    for (let index = 0; index < allPokemonStatsValue[i].length; index++) {
+        justBaseStatValues.push(allPokemonStatsValue[i][index]['base_stat']);
+        console.log('Base Stats sind: ', justBaseStatValues);
+    }
     
     new Chart(ctx, {
-        type: 'radar',
+        type: 'polarArea',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['hp', 'attack', 'defense', 'special-attack', 'special-defense', 'speed'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Stats',
+                data: justBaseStatValues,
                 borderWidth: 1
             }]
         },

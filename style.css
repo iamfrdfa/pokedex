@@ -8,6 +8,21 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #F9CE00;
+    border: 2px solid #547BAF;
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+
 .d-none {
     display: none !important;
 }
@@ -20,6 +35,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12px;
 }
 
 header > img {
@@ -34,10 +50,11 @@ header > img {
     align-items: center;
     flex-direction: column;
     margin-bottom: 40px;
+    padding: 12px;
 }
 
 input#searchPokemonInput {
-    width: 200px;
+    width: 232px;
     height: 40px;
     border-radius: 20px;
     line-height: 18px;
@@ -62,6 +79,7 @@ button:hover {
 
 #searchPokemon,
 #resetSearch {
+    width: 250px;
     height: 40px;
     border-radius: 20px;
     border: 1px solid lightgray;
@@ -109,7 +127,7 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     padding-top: 16px;
-    margin: 0 32px 32px 0;
+    margin: 0 16px 32px 0;
 }
 
 .pokeCard:hover {
@@ -137,6 +155,11 @@ button:hover {
 
 .pokemonTypeOverlay {
     display: flex;
+}
+
+canvas#myChart {
+    height: 30vh !important;
+    width: 95% !important;
 }
 
 #pokemonName {
@@ -178,7 +201,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 2;
 }
@@ -194,7 +217,6 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     padding-top: 16px;
-    margin: 0 32px 32px 0;
 }
 
 .bigPokeCardTop {
@@ -241,12 +263,20 @@ button:hover {
     gap: 15%;
 }
 
-.arrowButton {
+.arrowButtonLeft {
     height: 40px;
     width: 40px;
+    margin-right: 60px;
 }
 
-.arrowButton:hover {
+.arrowButtonRight {
+    height: 40px;
+    width: 40px;
+    margin-left: 60px;
+}
+
+.arrowButtonLeft:hover,
+.arrowButtonRight:hover {
     cursor: pointer;
 }
 
@@ -277,4 +307,40 @@ button:hover {
 
 .red {
     background-color: red !important;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f9fb;
+    transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-radius: 50%;
+    animation: loader 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
 }
