@@ -402,8 +402,3 @@ footer {
         width: 270px !important;
     }
 }
-
-.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-}
