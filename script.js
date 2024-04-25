@@ -126,16 +126,6 @@ function getTypesHTML(pokeIndex) {
     return htmlText;
 }
 
-function colorPokemonTypes(colorIndex, index) {
-    let pokeTypeClass = "";
-    let detailPokemon = allPokemon[colorIndex];
-    for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
-        pokeTypeClass +=`${allPokemon[colorIndex]['types'][0]['type']['name']}`;
-    }
-    console.log(pokeTypeClass);
-    return pokeTypeClass;
-}
-
 function deleteSearch() {
     document.getElementById('searchPokemonInput').value = ``;
     loadPokemon();
