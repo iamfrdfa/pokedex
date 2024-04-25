@@ -211,8 +211,8 @@ canvas#myChart {
 }
 
 .bigPokeCard {
-    width: 80%;
-    height: 90%;
+    width: 650px;
+    height: 800px;
     background-color: #F66C6D !important;
     color: white;
     display: flex;
@@ -329,6 +329,13 @@ footer {
 }
 
 /* Mobile optimisation */
+@media (max-width: 1000px) {
+    .bigPokeCard {
+        width: 80% !important;
+        height: 90% !important;
+    }
+}
+
 @media (max-width: 500px) {
     #pokemonInfoName,
     #pokemonNumber {

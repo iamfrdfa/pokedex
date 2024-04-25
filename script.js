@@ -2,10 +2,14 @@ let allPokemon = [];
 let allPokemonTypes = [];
 let allPokemonNames = [];
 let startCount = 0;
-let endCount = 49;
-let loadMoreCounter = 50;
+let endCount = 29;
+let loadMoreCounter = 30;
 let allPokemonStatsValue = [];
-const ALL_TYPES = ['grass', 'water', 'fire', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'rock', 'psychic', 'ice', 'dragon', 'flying', 'ghost', 'dark', 'steel']
+
+async function init() {
+    await loadPokemon();
+    endLoading();
+}
 
 async function loadPokemon(index) {
     let currentPokemon;
@@ -20,13 +24,6 @@ async function loadPokemon(index) {
         
         renderPokemonCard(index);
     }
-    console.log('Loaded Pokemon: ', currentPokemon);
-}
-
-async function loadMorePokemon() {
-    startCount += loadMoreCounter;
-    endCount += loadMoreCounter;
-    await loadPokemon();
 }
 
 function renderPokemonCard(indexPokemon) {
@@ -103,6 +100,37 @@ function openPokemonOverlay(indexOfPokemon) {
     renderStats(indexOfPokemon);
 }
 
+function getTypesHTML(pokeIndex) {
+    let htmlText = "";
+    let detailPokemon = allPokemon[pokeIndex];
+    for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
+        htmlText +=` <p>${allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']}</p> `;
+        allPokemonTypes.push(detailPokemon['types']);
+    }
+    return htmlText;
+}
+
+async function loadMorePokemon() {
+    startLoading();
+    startCount += loadMoreCounter;
+    endCount += loadMoreCounter;
+    init();
+}
+
+function startLoading() {
+    let loadButton = document.getElementById('loadMore');
+    loadButton.innerHTML = /*html*/ `<b>Loading more Pokémon...</b>`;
+}
+
+function endLoading() {
+    let loadButton = document.getElementById('loadMore');
+    loadButton.innerHTML = /*html*/ `
+        <button onclick="loadMorePokemon()">
+            Load More Pokemon
+        </button>
+    `;
+}
+
 //Filterfunktion für die Suche
 function filterNames(index = 0) {
     let search = document.getElementById('searchPokemonInput').value;
@@ -116,26 +144,9 @@ function filterNames(index = 0) {
     }
 }
 
-function getTypesHTML(pokeIndex) {
-    let htmlText = "";
-    let detailPokemon = allPokemon[pokeIndex];
-    for (let indexOfPokemonType = 0; indexOfPokemonType < detailPokemon['types'].length; indexOfPokemonType++) {
-        htmlText +=` <p>${allPokemon[pokeIndex]['types'][indexOfPokemonType]['type']['name']}</p> `;
-        allPokemonTypes.push(detailPokemon['types']);
-    }
-    return htmlText;
-}
-
 function deleteSearch() {
     document.getElementById('searchPokemonInput').value = ``;
     loadPokemon();
-}
-
-function closePokemonOverlay() {
-    document.getElementById('pokemonInfoOverlay').innerHTML = ``;
-    document.getElementById('pokemonInfoOverlay').classList.add('d-none');
-    document.body.style.overflowY = 'auto';
-    renderPokemonCard();
 }
 
 function nextPokemon(indexOfPokemon) {
@@ -154,8 +165,10 @@ function previousPokemon(indexOfPokemon) {
     }
 }
 
-function init() {
-    loadPokemon();
+function closePokemonOverlay() {
+    document.getElementById('pokemonInfoOverlay').innerHTML = ``;
+    document.getElementById('pokemonInfoOverlay').classList.add('d-none');
+    document.body.style.overflowY = 'auto';
 }
 
 //Funktion um mit bestimmten Tasten im Overlay zu agieren
@@ -164,30 +177,9 @@ document.addEventListener('keydown', evt => {
         closePokemonOverlay();
     }
     else if (evt.key === 'ArrowRight') {
-        nextPokemon(allPokemon + 1);
+        nextPokemon(allPokemon ++);
     }
     else if (evt.key === 'ArrowLeft') {
-        previousPokemon(allPokemon - 1);
+        previousPokemon(allPokemon --);
     }
 });
-
-let pokemonTypeColors = [
-    { type: "normal", backgroundColor: "#e6e6e6"},
-    { type: "fire", backgroundColor: "#fae1d8"},
-    { type: "water", backgroundColor: "#e2effa"},
-    { type: "electric", backgroundColor: "#fff9da"},
-    { type: "grass", backgroundColor: "#EEFFEF"},
-    { type: "ice", backgroundColor: "#e9fcfc"},
-    { type: "fighting", backgroundColor: "#f8d2d2"},
-    { type: "poison", backgroundColor: "#e9ddfd"},
-    { type: "ground", backgroundColor: "#ffefe6"},
-    { type: "flying", backgroundColor: "#e7f7fd"},
-    { type: "psychic", backgroundColor: "#ffe3e3"},
-    { type: "bug", backgroundColor: "#f4f8da"},
-    { type: "rock", backgroundColor: "#d6d6d6"},
-    { type: "ghost", backgroundColor: "#d7d7fb"},
-    { type: "dragon", backgroundColor: "#d3c9fb"},
-    { type: "dark", backgroundColor: "#bfb5b4"},
-    { type: "steel", backgroundColor: "#e2e5e7"},
-    { type: "fairy", backgroundColor: "#ffecec"},
-];
