@@ -2,8 +2,8 @@ let allPokemon = [];
 let allPokemonTypes = [];
 let allPokemonNames = [];
 let startCount = 0;
-let endCount = 29;
-let loadMoreCounter = 30;
+let endCount = 49;
+let loadMoreCounter = 50;
 let allPokemonStatsValue = [];
 const ALL_TYPES = ['grass', 'water', 'fire', 'bug', 'normal', 'poison', 'electric', 'ground', 'fairy', 'fighting', 'rock', 'psychic', 'ice', 'dragon', 'flying', 'ghost', 'dark', 'steel']
 

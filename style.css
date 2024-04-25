@@ -96,7 +96,7 @@ button:hover {
 
 #loadMore > button {
     background-color: #FBCA1C;
-    border: none;
+    border: 2px solid #547BAF;
     font-size: 20px;
     line-height: 40px;
     padding: 8px 12px;
@@ -162,8 +162,8 @@ button:hover {
 }
 
 canvas#myChart {
-    height: 30vh !important;
-    width: 95% !important;
+    height: 300px !important;
+    width: 400px !important;
 }
 
 #pokemonName {
@@ -211,8 +211,8 @@ canvas#myChart {
 }
 
 .bigPokeCard {
-    width: 600px;
-    height: 800px;
+    width: 80%;
+    height: 90%;
     background-color: #F66C6D !important;
     color: white;
     display: flex;
@@ -240,10 +240,11 @@ canvas#myChart {
     height: 300px;
     width: auto;
     z-index: 2;
+    margin: -65px 0 0 0;
 }
 
 .bigPokeCardBottom {
-    height: 450px;
+    height: 100%;
     width: 100%;
     background-color: white;
     border-radius: 20px 20px 10px 10px;
@@ -265,6 +266,7 @@ canvas#myChart {
     align-items: center;
     flex-wrap: wrap;
     gap: 15%;
+    margin: 20px 0 0 0;
 }
 
 .arrowButtonLeft {
@@ -309,42 +311,92 @@ canvas#myChart {
     cursor: pointer;
 }
 
-.red {
-    background-color: red !important;
-}
-
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+footer {
+    width: 100%;
+    height: 80px;
+    background-color: #EDE9E9;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f7f9fb;
-    transition: opacity 0.75s, visibility 0.75s;
+    gap: 16px;
+    margin-top: 50px;
+}
+
+.link {
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+}
+
+/* Mobile optimisation */
+@media (max-width: 500px) {
+    #pokemonInfoName,
+    #pokemonNumber {
+        font-size: 24px !important;
+    }
+
+    .close-btn {
+        height: 24px !important;
+        width: 24px !important;
+    }
+
+    #aboutHeader {
+        gap: 0;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    footer > h3 {
+        display: none;
+    }
+
+    footer > p {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .bigPokemonImage {
+        margin: 0;
+    }
+
+    .arrowButtonLeft,
+    .arrowButtonRight {
+        height: 32px;
+        width: 32px;
+    }
+
+    #aboutWrapper {
+        gap: 35%;
+    }
+
+    canvas#myChart {
+        height: 250px !important;
+        width: 300px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .bigPokeCard {
+        height: 77%;
+    }
+    #pokemonInfoImage {
+        height: 250px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    canvas#myChart {
+        height: 220px !important;
+        width: 270px !important;
+    }
 }
 
 .loader-hidden {
     opacity: 0;
     visibility: hidden;
-}
-
-.loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-radius: 50%;
-    animation: loader 0.75s ease infinite;
-}
-
-@keyframes loading {
-    from {
-        transform: rotate(0turn);
-    }
-    to {
-        transform: rotate(1turn);
-    }
 }

@@ -4,7 +4,6 @@ function renderStats(i) {
     
     for (let index = 0; index < allPokemonStatsValue[i].length; index++) {
         justBaseStatValues.push(allPokemonStatsValue[i][index]['base_stat']);
-        console.log('Base Stats sind: ', justBaseStatValues);
     }
     
     new Chart(ctx, {
