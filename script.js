@@ -117,14 +117,14 @@ async function loadMorePokemon() {
 }
 
 function startLoading() {
-    let loadButton = document.getElementById('loadMore');
+    let loadButton = document.getElementById('loadMoreButton');
     loadButton.innerHTML = /*html*/ `<b>Loading more Pokémon...</b>`;
 }
 
 function endLoading() {
     let loadButton = document.getElementById('loadMore');
     loadButton.innerHTML = /*html*/ `
-        <button onclick="loadMorePokemon()">
+        <button onclick="loadMorePokemon()" id="loadMoreButton">
             Load More Pokemon
         </button>
     `;
