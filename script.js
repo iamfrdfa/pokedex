@@ -5,14 +5,13 @@ let startCount = 0;
 let endCount = 29;
 let loadMoreCounter = 30;
 let allPokemonStatsValue = [];
-
+let currentPokemon;
 async function init() {
     await loadPokemon();
     endLoading();
 }
 
 async function loadPokemon(index) {
-    let currentPokemon;
     for (let index = startCount; index <= endCount; index++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${index + 1}`;
         let response = await fetch(url);
@@ -72,9 +71,9 @@ function openPokemonOverlay(indexOfPokemon) {
             
             <div class="bigPokeCardBottom">
                 <div id="aboutHeader">
-                    <img src="./img/left.png" alt="previousPokemon" class="arrowButtonLeft" onclick="previousPokemon(${indexOfPokemon})">
+                    <img src="./img/left.png" alt="previousPokemon" id="arrowLeft_${indexOfPokemon}" class="arrowButtonLeft" onclick="previousPokemon(${indexOfPokemon})">
                     <h3>About</h3>
-                    <img src="./img/right.png" alt="nextPokemon" class="arrowButtonRight" onclick="nextPokemon(${indexOfPokemon})">
+                    <img src="./img/right.png" alt="nextPokemon" id="rightArrow_${indexOfPokemon}" class="arrowButtonRight" onclick="nextPokemon(${indexOfPokemon})">
                 </div>
                 <div id="aboutWrapper">
                     <div class="left">
@@ -149,16 +148,27 @@ function deleteSearch() {
     loadPokemon();
 }
 
-function nextPokemon(indexOfPokemon) {
+async function nextPokemon(indexOfPokemon) {
     if (indexOfPokemon < 1025) {
-        indexOfPokemon++;
-        document.getElementById('pokemonInfoOverlay').innerHTML = ``;
-        openPokemonOverlay(indexOfPokemon);
+        if (indexOfPokemon === (currentPokemon['id'] - 1)) {
+            document.getElementById(`rightArrow_${indexOfPokemon}`).removeAttribute("onclick");
+            alert('Es werden mehr Pokemon geladen');
+            closePokemonOverlay();
+            await loadMorePokemon();
+        }
+        else if (indexOfPokemon < 1025) {
+            indexOfPokemon++;
+            document.getElementById('pokemonInfoOverlay').innerHTML = ``;
+            openPokemonOverlay(indexOfPokemon);
+        }
     }
 }
 
 function previousPokemon(indexOfPokemon) {
     if (indexOfPokemon >= 1) {
+        if (indexOfPokemon === 1) {
+            document.getElementById('leftArrow_0').removeAttribute("onclick");
+        }
         indexOfPokemon--;
         document.getElementById('pokemonInfoOverlay').innerHTML = ``;
         openPokemonOverlay(indexOfPokemon);
