@@ -146,6 +146,7 @@ function filterNames(index = 0) {
 function deleteSearch() {
     document.getElementById('searchPokemonInput').value = ``;
     loadPokemon();
+    window.location.reload();
 }
 
 async function nextPokemon(indexOfPokemon) {
